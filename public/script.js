@@ -1,4 +1,5 @@
 document.getElementById("submit").addEventListener("click", (event) => {
+    url = "https://chunk-url-shortener-b4adf6660818.herokuapp.com/api/shorturl"
     event.preventDefault();
     const originalUrl = document.getElementById("url-input").value;
     const output = document.getElementById("output");
@@ -6,7 +7,7 @@ document.getElementById("submit").addEventListener("click", (event) => {
         alert("URL is required");
         return
     }
-    fetch("/api/shorturl", {
+    fetch(url, {
         method: "POST",
         body: JSON.stringify({ url: originalUrl })
     })
