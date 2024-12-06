@@ -1,4 +1,4 @@
-document.getElementById("submit").addEventListener("click", (event) => {
+document.getElementById("submit-btn").addEventListener("click", (event) => {
     event.preventDefault();
     const originalUrl = document.getElementById("url-input").value;
     const output = document.getElementById("output");
@@ -6,7 +6,8 @@ document.getElementById("submit").addEventListener("click", (event) => {
         alert("URL is required");
         return
     }
-    fetch("/api/shorturl", {
+    const urlRequest = `https://chunk-url-shortener-b4adf6660818.herokuapp.com/api/shorturl/${originalUrl}`
+    fetch(urlRequest, {
         method: "POST",
         body: JSON.stringify({ url: originalUrl })
     })
@@ -23,4 +24,26 @@ document.getElementById("submit").addEventListener("click", (event) => {
     .catch(error => {
         output.innerText = `Server error (${error}) - please try again`
     })
+});
+
+document.getElementById("redirect-btn").addEventListener("click", (event) => {
+    event.preventDefault();
+    const shortUrl = document.getElementById("url-input").value;
+    const output = document.getElementById("output");
+    if ( !shortUrl || /^[0-9]+$/.test(shortUrl) ) {
+        alert("Short URL (integers only) is required");
+        return
+    }
+    const redirectRequest = `https://chunk-url-shortener-b4adf6660818.herokuapp.com/api/shorturl/${shortUrl}`;
+    fetch(redirectRequest)
+        .then(response => {
+            if ( !response.ok ) {
+                alert("Short URL not found");
+            }   else    {
+                window.location.href = response.url
+            }
+        })
+        .catch(error => {
+            output.innerText = `Error: ${error}`
+        })       
 })
