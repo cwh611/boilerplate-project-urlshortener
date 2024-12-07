@@ -6,7 +6,7 @@ document.getElementById("submit-btn").addEventListener("click", (event) => {
         alert("URL is required");
         return
     }
-    const urlRequest = `https://chunk-url-shortener-b4adf6660818.herokuapp.com/api/shorturl/${originalUrl}`
+    const urlRequest = `https://chunk-url-shortener-b4adf6660818.herokuapp.com/api/shorturl`
     fetch(urlRequest, {
         method: "POST",
         body: JSON.stringify({ url: originalUrl })
@@ -30,7 +30,7 @@ document.getElementById("redirect-btn").addEventListener("click", (event) => {
     event.preventDefault();
     const shortUrl = document.getElementById("url-input").value;
     const output = document.getElementById("output");
-    if ( !shortUrl || /^[0-9]+$/.test(shortUrl) ) {
+    if ( !shortUrl || !/^[0-9]+$/.test(shortUrl) ) {
         alert("Short URL (integers only) is required");
         return
     }
