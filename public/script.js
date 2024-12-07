@@ -9,9 +9,12 @@ document.getElementById("submit-btn").addEventListener("click", (event) => {
     const urlRequest = `https://chunk-url-shortener-b4adf6660818.herokuapp.com/api/shorturl`
     fetch(urlRequest, {
         method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({ url: originalUrl })
     })
-    .then(response => response.json)
+    .then(response => response.json())
     .then(data => {
         if ( data.error ) {
             output.innerText = `Error: ${data.error}`
