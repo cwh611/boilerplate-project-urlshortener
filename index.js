@@ -6,6 +6,14 @@ const dns = require('dns');
 
 const port = process.env.PORT || 3000;
 
+app.use((req, res, next) => {
+  res.setHeader(
+    "Content-Security-Policy",
+    "script-src 'self' https://chunk-url-shortener-b4adf6660818.herokuapp.com; connect-src 'self' https://chunk-url-shortener-b4adf6660818.herokuapp.com;"
+  );
+  next();
+});
+
 app.use(cors());
 
 app.use('/public', express.static(`${process.cwd()}/public`));
