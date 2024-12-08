@@ -33,8 +33,13 @@ let shortUrlCounter = 1;
 
 app.post("/api/shorturl", function (req, res) {
   const originalUrl = req.body.url;
+  const regex = "!/^https?:\/\/"
   if (!originalUrl) {
-    return res.status(400).json({ error: "URL is required" });
+    res.status(400).json({ error: "URL is required" });
+    return
+  } else if ( regex.test(originalUrl) ) {
+    res.status(400).json({ error: "invalid url" });
+    return
   }
   const { hostname } = new URL(originalUrl);
   dns.lookup(hostname, (err, addresses, family) => {
