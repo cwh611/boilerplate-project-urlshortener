@@ -53,9 +53,10 @@ app.get("/api/shorturl/:shorturl", function (req, res) {
   const originalUrl = urlDatabase[shortUrl];
   console.log(shortUrl, originalUrl);
   if ( !originalUrl ) {
-    return res.status(404).json({ error: "Short URL not found" })
+    res.status(404).json({ error: "Short URL not found" });
+    return
   }
-  res.redirect(originalUrl);
+  res.json({original_url: originalUrl})
 })
 
 app.listen(port, function() {

@@ -39,11 +39,12 @@ document.getElementById("redirect-btn").addEventListener("click", (event) => {
     }
     const redirectRequest = `https://chunk-url-shortener-b4adf6660818.herokuapp.com/api/shorturl/${shortUrl}`;
     fetch(redirectRequest)
-        .then(response => {
-            if ( !response.ok ) {
-                alert("Short URL not found");
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert("Short URL not found")
             }   else    {
-                window.location.href = response.url
+                window.location.href = data.original_url
             }
         })
         .catch(error => {
