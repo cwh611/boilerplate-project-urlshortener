@@ -59,6 +59,7 @@ app.post("/api/shorturl", function (req, res) {
 app.get("/api/shorturl/:shorturl", function (req, res) {
   const shortUrl = req.params.shorturl;
   const originalUrl = urlDatabase[shortUrl];
+  console.log(shortUrl, originalUrl);
   if ( !originalUrl ) {
     return res.status(404).json({ error: "Short URL not found" })
   }

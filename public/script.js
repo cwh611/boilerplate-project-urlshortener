@@ -17,7 +17,7 @@ document.getElementById("submit-btn").addEventListener("click", (event) => {
     .then(response => response.json())
     .then(data => {
         if ( data.error ) {
-            output.innerText = `Error: ${data.error}`
+            output.innerText = `Error: ${data.error} (protocol required)`
         }   else    {
             output.innerHTML = `
             <p>Original URL: ${data.original_url}</p>
