@@ -36,7 +36,7 @@ app.post("/api/shorturl", function (req, res) {
   if (!originalUrl) {
     res.status(400).json({ error: "URL is required" });
     return
-  } else if ( !/^https?:\/\/.test(originalUrl) ) {
+  } else if ( !/^https?:\/\//.test(originalUrl) ) {
     res.status(400).json({ error: "invalid url" });
     return
   }
