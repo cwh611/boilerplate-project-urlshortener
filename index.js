@@ -37,6 +37,7 @@ app.post("/api/shorturl", function (req, res) {
       return
     } 
     const shortUrl = shortUrlCounter;
+    console.log(shortUrl);
     urlDatabase[shortUrl] = originalUrl;
     res.json({
       original_url: originalUrl,
@@ -48,7 +49,6 @@ app.post("/api/shorturl", function (req, res) {
 
 app.use("/api/shorturl/:shorturl", function (req, res) {
   const shortUrl = req.params.shorturl;
-  console.log(shortUrl);
   const originalUrl = urlDatabase[shortUrl];
   console.log(shortUrl, originalUrl);
   if ( originalUrl ) {
