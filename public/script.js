@@ -24,26 +24,3 @@ document.getElementById("submit-btn").addEventListener("click", (event) => {
         output.innerText = `Server error (${error}) - please try again`
     })
 });
-
-document.getElementById("redirect-btn").addEventListener("click", (event) => {
-    event.preventDefault();
-    const shortUrl = document.getElementById("url-input").value;
-    const output = document.getElementById("output");
-    if ( !shortUrl || !/^[0-9]+$/.test(shortUrl) ) {
-        alert("Short URL (integers only) is required");
-        return
-    }
-    const redirectRequest = `https://chunk-url-shortener-b4adf6660818.herokuapp.com/api/shorturl/${shortUrl}`;
-    fetch(redirectRequest)
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert("Short URL not found")
-            }   else    {
-                window.location.href = data.original_url
-            }
-        })
-        .catch(error => {
-            output.innerText = `Error: ${error}`
-        })       
-})
