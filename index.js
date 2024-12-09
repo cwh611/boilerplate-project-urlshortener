@@ -49,8 +49,13 @@ app.post("/api/shorturl", function (req, res) {
 
 app.use("/api/shorturl/:shorturl", function (req, res) {
   const shortUrl = req.params.shorturl;
+  if ( shortUrl === "undefined" ) {
+    res.json({error: "invalid url"});
+    return
+  }
+  console.log(`SHORTURL ON REDIRECT: ${shortUrl}`);
   const originalUrl = urlDatabase[shortUrl];
-  console.log(shortUrl, originalUrl);
+  console.log(originalUrl);
   if ( originalUrl ) {
     res.redirect(originalUrl)
   } else  {
