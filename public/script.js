@@ -2,11 +2,7 @@ document.getElementById("submit-btn").addEventListener("click", (event) => {
     event.preventDefault();
     const originalUrl = document.getElementById("url-input").value;
     const output = document.getElementById("output");
-    if ( !originalUrl ) {
-        alert("URL is required");
-        return
-    }
-    const urlRequest = `https://chunk-url-shortener-b4adf6660818.herokuapp.com/api/shorturl`
+    const urlRequest = "https://chunk-url-shortener-b4adf6660818.herokuapp.com/api/shorturl"
     fetch(urlRequest, {
         method: "POST",
         headers: {

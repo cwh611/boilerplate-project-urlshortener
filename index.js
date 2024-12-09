@@ -25,13 +25,11 @@ let shortUrlCounter = 1;
 
 app.post("/api/shorturl", function (req, res) {
   const originalUrl = req.body.url;
-  if (!originalUrl) {
-    res.json({ error: "URL is required" });
-    return
-  } else if ( !/^https?:\/\//.test(originalUrl) ) {
+  if ( !/^https?:\/\//.test(originalUrl) ) {
     res.json({ error: "invalid url" });
     return
   }
+  console.log(originalUrl);
   const { hostname } = new URL(originalUrl);
   dns.lookup(hostname, (err, addresses, family) => {
     if (err) {
@@ -52,11 +50,11 @@ app.get("/api/shorturl/:shorturl", function (req, res) {
   const shortUrl = req.params.shorturl;
   const originalUrl = urlDatabase[shortUrl];
   console.log(shortUrl, originalUrl);
-  if ( !originalUrl ) {
-    res.json({ error: "Short URL not found" });
-    return
+  if ( originalUrl ) {
+    res.redirect(originalUrl)
+  } else  {
+    res.json({error: "invalid url"})
   }
-  res.json({original_url: originalUrl})
 })
 
 app.listen(port, function() {
