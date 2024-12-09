@@ -49,7 +49,7 @@ app.post("/api/shorturl", function (req, res) {
 
 app.use("/api/shorturl/:shorturl", function (req, res) {
   const shortUrl = req.params.shorturl;
-  if ( shortUrl === "undefined" ) {
+  if ( !urlDatabase.hasOwnProperty(shortUrl) ) {
     res.json({error: "invalid url"});
     return
   }
