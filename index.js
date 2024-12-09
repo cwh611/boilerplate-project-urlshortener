@@ -24,7 +24,10 @@ let urlDatabase = {};
 let shortUrlCounter = 1;
 
 app.post("/api/shorturl", function (req, res) {
-  console.log(`FULL POST REQUEST: ${JSON.stringify(req, null, 2)}`)
+  console.log("Post Request Method:", req.method);
+  console.log("Post Request URL:", req.url);
+  console.log("Post Request Headers:", JSON.stringify(req.headers, null, 2));
+  console.log("Post Request Body:", JSON.stringify(req.body, null, 2));
   const originalUrl = req.body.url;
   console.log(`Original link sent by FCC: ${originalUrl}`);
   if ( !/^https?:\/\//.test(originalUrl) ) {
@@ -52,7 +55,10 @@ app.post("/api/shorturl", function (req, res) {
 })
 
 app.get("/api/shorturl/:shorturl", function (req, res) {
-  console.log(`FULL GET REQUEST: ${JSON.stringify(req, null, 2)}`)
+  console.log("Get Request Method:", req.method);
+  console.log("Get Request URL:", req.url);
+  console.log("Get Request Headers:", JSON.stringify(req.headers, null, 2));
+  console.log("Get Request Body:", JSON.stringify(req.body, null, 2));
   const shortUrl = req.params.shorturl;
   console.log(`ShortUrl requested by FCC: ${shortUrl}`);
   if ( !shortUrl || !urlDatabase.hasOwnProperty(shortUrl) ) {
