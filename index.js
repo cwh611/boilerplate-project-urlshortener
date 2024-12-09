@@ -45,7 +45,7 @@ app.post("/api/shorturl", function (req, res) {
     })
     shortUrlCounter++;
     console.log(`shortUrlCounter on POST: ${shortUrlCounter}`);
-    console.log(`urlDatabase on POST: ${urlDatabase}`)
+    console.log(`urlDatabase on POST: ${JSON.stringify(urlDatabase, null, 2)}`)
   })
 })
 
