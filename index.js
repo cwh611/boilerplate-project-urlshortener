@@ -43,7 +43,9 @@ app.post("/api/shorturl", function (req, res) {
       original_url: originalUrl,
       short_url: shortUrl
     })
-    shortUrlCounter++
+    shortUrlCounter++;
+    console.log(`shortUrlCounter on POST: ${shortUrlCounter}`);
+    console.log(`urlDatabase on POST: ${urlDatabase}`)
   })
 })
 
@@ -57,7 +59,9 @@ app.get("/api/shorturl/:shorturl", function (req, res) {
   const originalUrl = urlDatabase[shortUrl];
   console.log(originalUrl);
   if ( originalUrl ) {
-    res.redirect(originalUrl)
+    res.redirect(originalUrl);
+    console.log(`shortUrlCounter on GET / redirect: ${shortUrlCounter}`);
+    console.log(`urlDatabase on GET / redirect: ${urlDatabase}`)
   } else  {
     res.json({error: "invalid url"})
   }
