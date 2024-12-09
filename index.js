@@ -61,7 +61,7 @@ app.get("/api/shorturl/:shorturl", function (req, res) {
   if ( originalUrl ) {
     res.redirect(originalUrl);
     console.log(`shortUrlCounter on GET / redirect: ${shortUrlCounter}`);
-    console.log(`urlDatabase on GET / redirect: ${urlDatabase}`)
+    console.log(`urlDatabase on GET / redirect: ${JSON.stringify(urlDatabase, null, 2)}`)
   } else  {
     res.json({error: "invalid url"})
   }
